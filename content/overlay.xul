@@ -9,4 +9,9 @@
     <menuitem id="pushcontent-hello" label="&pushcontent;" 
               oncommand="PushContent.onMenuItemCommand(event);"/>
   </menupopup>
+  
+  <popup id="contentAreaContextMenu">
+    <menuitem label="Push Content"
+              oncommand="PushContent.onMenuItemCommand(event);"/>
+  </popup>
 </overlay>
