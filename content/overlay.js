@@ -1,12 +1,12 @@
-var HelloWorld = {
+var PushContent = {
   onLoad: function() {
     // initialization code
     this.initialized = true;
   },
 
   onMenuItemCommand: function() {
-    window.open("chrome://helloworld/content/hello.xul", "", "chrome");
+    window.open("chrome://pushcontent/content/pushcontent.xul", "", "chrome");
   }
 };
 
-window.addEventListener("load", function(e) { HelloWorld.onLoad(e); }, false); 
+window.addEventListener("load", function(e) { PushContent.onLoad(e); }, false); 
