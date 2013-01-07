@@ -6,7 +6,8 @@ var PushContent = {
 		},
 
 		onMenuItemCommand: function() {
-			window.open("chrome://pushcontent/content/pushcontent.xul", "", "chrome");
+			if (document.popupNode.currentURI)
+				alert(JSON.stringify(document.popupNode.currentURI));
 		},
 
 };

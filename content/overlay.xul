@@ -5,11 +5,6 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="overlay.js"/>
 
-  <menupopup id="menu_ToolsPopup">
-    <menuitem id="pushcontent-hello" label="&pushcontent;" 
-              oncommand="PushContent.onMenuItemCommand(event);"/>
-  </menupopup>
-  
   <popup id="contentAreaContextMenu">
     <menuitem label="Push Content"
               oncommand="PushContent.onMenuItemCommand(event);"/>
