@@ -3,6 +3,9 @@
 <!DOCTYPE overlay SYSTEM "chrome://pushcontent/locale/overlay.dtd">
 <overlay id="pushcontent-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="autobahn.min.js"/>
+  <script src="cloudeebus.js"/>
+  <script src="mediarenderer.js"/>
   <script src="overlay.js"/>
 
   <popup id="contentAreaContextMenu">
