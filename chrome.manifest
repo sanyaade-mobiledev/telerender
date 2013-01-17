@@ -1,7 +1,7 @@
-content	pushcontent	content/
-overlay	chrome://browser/content/browser.xul	chrome://pushcontent/content/overlay.xul
+content	telerender	content/
+overlay	chrome://browser/content/browser.xul	chrome://telerender/content/overlay.xul
 
-locale	pushcontent	en-US	locale/en-US/
+locale	telerender	en-US	locale/en-US/
 
-skin	pushcontent	classic/1.0	skin/
-style	chrome://global/content/customizeToolbar.xul	chrome://pushcontent/skin/overlay.css
+skin	telerender	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://telerender/skin/overlay.css

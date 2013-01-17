@@ -4,10 +4,10 @@
 
   <Description about="urn:mozilla:install-manifest">
   
-    <em:id>pushcontent@intel.com</em:id>
-    <em:name>Push content</em:name>
+    <em:id>telerender@intel.com</em:id>
+    <em:name>Telerender</em:name>
     <em:version>1.0</em:version>
-    <em:description>Push media content to a remote device with a popup menu.</em:description>
+    <em:description>Push media content to a remote DLNA renderer with a popup menu.</em:description>
     <em:creator>Luc Yriarte</em:creator>
 
     <!-- Firefox -->

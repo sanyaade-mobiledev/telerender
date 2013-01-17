@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://pushcontent/skin/overlay.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://pushcontent/locale/overlay.dtd">
-<overlay id="pushcontent-overlay"
+<?xml-stylesheet href="chrome://telerender/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://telerender/locale/overlay.dtd">
+<overlay id="telerender-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="autobahn.min.js"/>
   <script src="cloudeebus.js"/>
@@ -9,7 +9,7 @@
   <script src="overlay.js"/>
 
   <popup id="contentAreaContextMenu">
-    <menuitem label="Push Content"
-              oncommand="PushContent.onMenuItemCommand(event);"/>
+    <menuitem label="Telerender"
+              oncommand="Telerender.onMenuItemCommand(event);"/>
   </popup>
 </overlay>

@@ -1,7 +1,7 @@
-var PushContent = {
+var Telerender = {
 
 	manifest: {
-		name: "pushcontent",
+		name: "telerender",
 		key: "demo talk",
 		permissions: ["com.intel.renderer-service-upnp"]
 	},
@@ -12,13 +12,13 @@ var PushContent = {
 		mediarenderer.setRendererListener(
 				{
 					onrendererfound: function(renderer) {
-						PushContent.renderers.push(renderer);
+						Telerender.renderers.push(renderer);
 					}, 
 					
 					onrendererlost: function(id) {
-						for (var i=0; i<PushContent.renderers.length; i++) {
-							if (PushContent.renderers[i].id == id) {
-								PushContent.renderers.splice(i,1);
+						for (var i=0; i<Telerender.renderers.length; i++) {
+							if (Telerender.renderers[i].id == id) {
+								Telerender.renderers.splice(i,1);
 								return;
 							}
 						}
@@ -37,8 +37,8 @@ var PushContent = {
 
 	onMenuItemCommand: function() {
 		if (document.popupNode.currentURI && document.popupNode.currentURI.spec) {
-			for (var i=0; i<PushContent.renderers.length; i++) {
-				var renderer = PushContent.renderers[i];
+			for (var i=0; i<Telerender.renderers.length; i++) {
+				var renderer = Telerender.renderers[i];
 				renderer.openURI(document.popupNode.currentURI.spec,
 					function() {
 						renderer.controller.play();
@@ -52,4 +52,4 @@ var PushContent = {
 
 };
 
-window.addEventListener("load", function(e) { PushContent.onLoad(e); }, false); 
+window.addEventListener("load", function(e) { Telerender.onLoad(e); }, false); 
