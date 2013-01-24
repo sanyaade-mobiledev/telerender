@@ -1,1 +1,1 @@
-/data/git/firefox-pushcontent
+/data/git/telerender
