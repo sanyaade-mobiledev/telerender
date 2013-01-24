@@ -1,5 +1,7 @@
 var Telerender = {
 
+	connected: false,
+	
 	manifest: {
 		name: "telerender",
 		key: "demo talk",
@@ -24,12 +26,12 @@ var Telerender = {
 						}
 					}
 				});
-		this.initialized = true;		
+		this.initialized = Telerender.connected = true;		
 	},
 	
 	onPopupShowing: function() {
 		var contextSubMenu = document.getElementById("contentAreaContextSubMenu");
-		if (document.popupNode.currentURI && document.popupNode.currentURI.spec) {
+		if (Telerender.connected && document.popupNode.currentURI && document.popupNode.currentURI.spec) {
 			contextSubMenu.disabled=false;
 			var contextSubMenuPopup = document.getElementById("contentAreaContextSubMenuPopup");
 			while (contextSubMenuPopup.firstChild)
@@ -48,10 +50,7 @@ var Telerender = {
 	
 	onLoad: function() {
 		// initialization code
-		mediarenderer.init("ws://localhost:9000", this.manifest, this.postInit, 
-			function(err) {
-				alert("Failed to initialize server: " + err);
-		});
+		mediarenderer.init("ws://localhost:9000", this.manifest, this.postInit);
 		// dynamic popup menu
 		var contextMenu = document.getElementById("contentAreaContextMenu");
 		contextMenu.addEventListener("popupshowing", function() { Telerender.onPopupShowing(); }, false);
