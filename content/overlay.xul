@@ -9,7 +9,11 @@
   <script src="overlay.js"/>
 
   <popup id="contentAreaContextMenu">
-    <menuitem label="Telerender"
-              oncommand="Telerender.onMenuItemCommand(event);"/>
+  <menu id="contentAreaContextSubMenu" label="Telerender">
+    <menupopup id="contentAreaContextSubMenuPopup">
+    <!--menuitem label="Renderer 0"
+              oncommand="Telerender.onMenuItemCommand(0);"/-->
+    </menupopup>
+  </menu>
   </popup>
 </overlay>
