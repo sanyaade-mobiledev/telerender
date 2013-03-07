@@ -14,7 +14,8 @@ var Telerender = {
 		mediarenderer.setRendererListener(
 				{
 					onrendererfound: function(renderer) {
-						Telerender.renderers.push(renderer);
+						if (renderer.friendlyName)
+							Telerender.renderers.push(renderer);
 					}, 
 					
 					onrendererlost: function(id) {
