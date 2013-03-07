@@ -21,7 +21,7 @@
 var mediarenderer = window.mediarenderer = {};
 
 mediarenderer.reset = function() {
-	mediarenderer.busName = "com.intel.renderer-service-upnp";
+	mediarenderer.busName = "com.intel.dleyna-renderer";
 	mediarenderer.bus = null;
 	mediarenderer.uri = null;
 	mediarenderer.manager = null;
@@ -39,7 +39,7 @@ mediarenderer.init = function(uri, manifest, successCB, errorCB) {
 	function onConnectOk() {
 		mediarenderer.bus = cloudeebus.SessionBus();
 		mediarenderer.uri = uri;
-		mediarenderer.manager = mediarenderer.bus.getObject(mediarenderer.busName, "/com/intel/RendererServiceUPnP", onManagerOk);
+		mediarenderer.manager = mediarenderer.bus.getObject(mediarenderer.busName, "/com/intel/dLeynaRenderer", onManagerOk);
 	}
 	
 	cloudeebus.connect(uri, manifest, onConnectOk, errorCB);
@@ -66,9 +66,9 @@ mediarenderer.setRendererListener = function(rendererCallback, errorCallback) {
 	}
 	
 	mediarenderer.manager.GetServers(onObjIdsOk, errorCallback);
-	mediarenderer.manager.connectToSignal("com.intel.RendererServiceUPnP.Manager", "FoundServer",
+	mediarenderer.manager.connectToSignal("com.intel.dLeynaRenderer.Manager", "FoundServer",
 			onObjIdOk, errorCallback);
-	mediarenderer.manager.connectToSignal("com.intel.RendererServiceUPnP.Manager", "LostServer",
+	mediarenderer.manager.connectToSignal("com.intel.dLeynaRenderer.Manager", "LostServer",
 			rendererLostCB, errorCallback);
 };
 
@@ -79,6 +79,8 @@ mediarenderer.setRendererListener = function(rendererCallback, errorCallback) {
 mediarenderer.MediaController = function(renderer) {
 	this.renderer = renderer;
 	this.paused = true;
+	this.volume = renderer.proxy.Volume == undefined ? 1 : Number(renderer.proxy.Volume);
+	this.track = renderer.proxy.CurrentTrack == undefined ? 1 : Number(renderer.proxy.CurrentTrack);
 	return this;
 };
 
@@ -105,6 +107,53 @@ mediarenderer.MediaController.prototype.pause = function() {
 };
 
 
+mediarenderer.MediaController.prototype.stop = function() {
+	var self = this;
+
+	function onStopOk() {
+		self.paused = true;
+	}
+	
+	this.renderer.proxy.Stop(onStopOk, cloudeebus.log);
+};
+
+
+mediarenderer.MediaController.prototype.next = function() {
+	this.renderer.proxy.Next();
+	this.track++;
+};
+
+
+mediarenderer.MediaController.prototype.previous = function() {
+	this.renderer.proxy.Previous();
+	this.track--;
+};
+
+
+mediarenderer.MediaController.prototype.setVolume = function(vol) {
+	var self = this;
+	var volNum = Math.max(0,Math.min(0.99,Number(vol)));
+	
+	function onSetVolumeOk() {
+		self.volume = volNum;
+	}
+	
+	this.renderer.proxy.Set("org.mpris.MediaPlayer2.Player", "Volume", volNum, onSetVolumeOk, cloudeebus.log);
+};
+
+
+mediarenderer.MediaController.prototype.gotoTrack = function(track) {
+	var self = this;
+	var trackNum = Number(track);
+	
+	function onGotoTrackOk() {
+		self.track = trackNum;
+	}
+	
+	this.renderer.proxy.GotoTrack(trackNum, onGotoTrackOk, cloudeebus.log);
+};
+
+
 
 /*****************************************************************************/
 
@@ -113,6 +162,7 @@ mediarenderer.MediaRenderer = function(proxy) {
 	if (proxy) {
 		this.id = proxy.objectPath;
 		this.friendlyName = proxy.Identity;
+		this.protocolInfo = proxy.ProtocolInfo;
 	}
 	this.controller = new mediarenderer.MediaController(this);
 	return this;

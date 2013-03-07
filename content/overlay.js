@@ -5,7 +5,7 @@ var Telerender = {
 	manifest: {
 		name: "telerender",
 		key: "demo talk",
-		permissions: ["com.intel.renderer-service-upnp"]
+		permissions: ["com.intel.dleyna-renderer"]
 	},
 
 	renderers: [],
