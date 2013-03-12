@@ -10,6 +10,8 @@ var Telerender = {
 
 	renderers: [],
 	
+	renderURI: null,
+	
 	postInit: function() {
 		mediarenderer.setRendererListener(
 				{
@@ -32,7 +34,12 @@ var Telerender = {
 	
 	onPopupShowing: function() {
 		var contextSubMenu = document.getElementById("contentAreaContextSubMenu");
-		if (Telerender.connected && document.popupNode.currentURI && document.popupNode.currentURI.spec) {
+		Telerender.renderURI = null;
+		if (Telerender.connected && document.popupNode.currentURI && document.popupNode.currentURI.spec)
+			Telerender.renderURI = document.popupNode.currentURI.spec;
+		else if (gContextMenu.linkURL)
+			Telerender.renderURI = gContextMenu.linkURL;
+		if (Telerender.renderURI) {
 			contextSubMenu.disabled=false;
 			var contextSubMenuPopup = document.getElementById("contentAreaContextSubMenuPopup");
 			while (contextSubMenuPopup.firstChild)
@@ -59,12 +66,12 @@ var Telerender = {
 
 	onMenuItemCommand: function(index) {
 		var renderer = Telerender.renderers[index];
-		renderer.openURI(document.popupNode.currentURI.spec,
+		renderer.openURI(Telerender.renderURI,
 			function() {
 				renderer.controller.play();
 			},
 			function(err) {
-				alert(renderer.friendlyName + " failed to load " + document.popupNode.currentURI.spec + "\n" + err);
+				alert(renderer.friendlyName + " failed to load " + Telerender.renderURI + "\n" + err);
 			});
 	}
 
