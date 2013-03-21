@@ -7,8 +7,9 @@ Push media content to a remote DLNA renderer with a popup menu.
 Usage
 -----
 
-Right click a media element on the current web page. The "Telerender" popup menu will send the URI of that element
-to all DLNA renderers known on the network. 
+Right click a media element on the current web page, or a link to a media element. 
+The "Telerender" popup menu will open a list of all DLNA renderers known on the network,
+and send the URI of that element to the selected renderer.
 
 
 Install
@@ -21,7 +22,7 @@ Install
 Requirements
 ------------
 
-  * [dLeyna renderer-service-upnp](https://github.com/01org/renderer-service-upnp)
+  * [dleyna-renderer](https://github.com/01org/dleyna-renderer)
   * [Cloudeebus](https://github.com/01org/cloudeebus)
 
 
