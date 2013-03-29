@@ -66,7 +66,7 @@ var Telerender = {
 
 	onMenuItemCommand: function(index) {
 		var renderer = Telerender.renderers[index];
-		renderer.openURI(Telerender.renderURI,
+		renderer.openURI(Telerender.renderURI, null, // no meta data
 			function() {
 				renderer.controller.play();
 			},
